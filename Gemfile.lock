@@ -1,0 +1,93 @@
+PATH
+  remote: .
+  specs:
+    rainmachine (0.0.1)
+      activesupport (~> 6.1)
+      faraday_middleware (~> 1.1)
+      homie-mqtt (~> 1.2)
+      net-http-persistent (~> 4.0)
+      thor (~> 1.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (6.1.4)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
+    ast (2.4.2)
+    byebug (9.1.0)
+    concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
+    faraday (1.7.0)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
+    faraday_middleware (1.1.0)
+      faraday (~> 1.0)
+    homie-mqtt (1.4.1)
+      mqtt-ccutrer (~> 1.0)
+    i18n (1.8.10)
+      concurrent-ruby (~> 1.0)
+    minitest (5.14.4)
+    mqtt-ccutrer (1.0.0)
+    multipart-post (2.1.1)
+    net-http-persistent (4.0.1)
+      connection_pool (~> 2.2)
+    parallel (1.20.1)
+    parser (3.0.2.0)
+      ast (~> 2.4.1)
+    rainbow (3.0.0)
+    rake (13.0.1)
+    regexp_parser (2.1.1)
+    rexml (3.2.5)
+    rubocop (1.18.4)
+      parallel (~> 1.10)
+      parser (>= 3.0.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.8.0, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.9.1)
+      parser (>= 3.0.1.1)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
+    ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.5)
+    thor (1.1.0)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+    unicode-display_width (2.0.0)
+    zeitwerk (2.4.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  byebug (~> 9.0)
+  rainmachine!
+  rake (~> 13.0)
+  rubocop (~> 1.18)
+  rubocop-rake (~> 0.6)
+
+BUNDLED WITH
+   2.1.4

@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "rainmachine"
+require "thor"
+
+class RainMachineCLI < Thor
+  desc "mqtt MQTT_URI", "Run an MQTT bridge to control a RainMachine sprinkler controller"
+  option :"sprinkler-id", desc: "Which Cloud device to use"
+  option :"device-id", desc: "The Homie Device ID"
+  option :"root-topic", default: "homie", desc: "The root Homie topic"
+  option :url, desc: "URL of a local device to connect to"
+  option :email, desc: "email for the Cloud device"
+  option :password, desc: "password", required: true
+  def mqtt(mqtt_uri)
+    require "rain_machine/cli/mqtt"
+
+    raise ArgumentError, "must supply email or url" unless options[:email] || options[:url]
+
+    devices = if options["email"]
+                cloud = RainMachine::Cloud.new(options[:email], options[:password])
+                if options["device-id"]
+                  [cloud.device(options["device-id"])]
+                else
+                  cloud.device_ids.map { |id| cloud.device(id) }
+                end
+              else
+                [RainMachine::Device.new(options[:url], password: options[:password])]
+              end
+
+    devices.map do |device|
+      Thread.new do
+        homie = MQTT::Homie::Device.new(
+          options["device-id"] || MQTT::Homie.escape_id(device.id),
+          device.name,
+          mqtt: mqtt_uri,
+          root_topic: options["root-topic"]
+        )
+
+        RainMachine::CLI::MQTT.new(device, homie)
+      end
+    end.each(&:join)
+  end
+
+  desc "device EMAIL PASSWORD", "list devices in a Cloud account"
+  def devices(email, password)
+    cloud = RainMachine::Cloud.new(email, password)
+    cloud.device_ids.each do |id|
+      device = cloud.device(id)
+      puts "#{device.name} (#{device.model}): #{device.id} #{device.ip_address}"
+    end
+  end
+end
+
+RainMachineCLI.start(ARGV)
